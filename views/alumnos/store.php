@@ -1,25 +1,26 @@
 <div class="card">
     <div class="card-header text-center">
-        Formulario de registro
+        <h5 class="card-title">Formulario de registro</h5>
     </div>
-    <form action="#" method="post">
+    <form method="post">
         <div class="card-body">
             <div class="row">
                 <div class="col-md-12 form-group">
                     <label for="nombre">Nombre del alumno: </label>
-                    <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre">
+                    <input type="text" name="nombre" id="nombre" required class="form-control" placeholder="Nombre">
                 </div>
                 <div class="col-md-12 form-group">
                     <label for="nombre">Apellidos: </label>
-                    <input type="text" name="apellidos" id="apellidos" class="form-control" placeholder="Apellidos">
+                    <input type="text" name="apellidos" id="apellidos" required class="form-control" placeholder="Apellidos">
                 </div>
                 <div class="col-md-12 form-group">
                     <label for="nombre">Número de identificación: </label>
-                    <input type="number" name="nif" id="nif" class="form-control" placeholder="NIF">
+                    <input type="number" name="nif" id="nif" required class="form-control" placeholder="NIF">
                 </div>
             </div>
         </div>
-        <div class="card-footer text-muted text-center">
+        <div class="card-footer text-muted">
+            <a class="btn btn-info mr-1" href="?controller=alumnos&action=index" role="button">Cancelar</a>
             <button type="submit" class="btn btn-success">Guardar Alumno</button>
         </div>
     </form>

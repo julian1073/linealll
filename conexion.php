@@ -9,7 +9,6 @@
                 self::$instance = new PDO(
                     'mysql:host=localhost;dbname=db_linea','root','', $opcionesPDO
                 );
-                echo 'Conexion realizada';
             }
             return self::$instance;
         }
