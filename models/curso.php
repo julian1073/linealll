@@ -47,6 +47,8 @@
         {
             $conexionBD = BD::createInstance();
 
+            $sqlC = $conexionBD->prepare("DELETE FROM alumnos_cursos WHERE id_curso=?");
+            $sqlC->execute(array($id));
             $sql = $conexionBD->prepare("DELETE FROM cursos WHERE id=?");
             $sql->execute(array($id));
         }
