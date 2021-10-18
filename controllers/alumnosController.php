@@ -1,6 +1,7 @@
 <?php
 
     require_once('models/alumno.php');
+    require_once('models/curso.php');
     require_once('conexion.php');
     BD::createInstance();
 
@@ -16,7 +17,7 @@
                 $nombre = $_POST['nombre'];
                 $nif = $_POST['nif'];
                 $apellidos = $_POST['apellidos'];
-                Alumno::create($nombre, $nif, $apellidos);
+                $respuesta = Alumno::create($nombre, $nif, $apellidos);
                 header("Location:./?controller=alumnos&action=index");
             }
             else{
@@ -33,7 +34,7 @@
                 $nombre = $_POST['nombre'];
                 $apellidos = $_POST['apellidos'];
                 $nif = $_POST['nif'];
-                Alumno::update($id, $nombre, $apellidos, $nif);
+                $respuesta = Alumno::update($id, $nombre, $apellidos, $nif);
                 header("Location:./?controller=alumnos&action=index");
             }
 
@@ -42,8 +43,22 @@
         public function delete()
         {
             $id = $_GET['id'];
-            Alumno::delete($id);
+            $respuesta = json_encode(Alumno::delete($id));
             header("Location:./?controller=alumnos&action=index");
+        }
+        public function asignar()
+        {
+            $id = $_GET['id'];
+            $cursos = Curso::getAll();
+
+            include_once('views/alumnos/asignar.php');
+        }
+        public function ver()
+        {
+            $id = $_GET['id'];
+            $cursos = Alumno::getAllCursos($id);
+
+            include_once('views/alumnos/ver.php');
         }
     }
 ?>

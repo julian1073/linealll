@@ -1,3 +1,12 @@
+<?php
+    require_once('config/funcs.php');
+
+    if (isset($_POST['submit'])) {
+        AntiCSRF();
+    }
+
+    GenerarAntiCSRF();//Genera un token para evitar ataques CSRF
+?>
 <div class="card">
     <div class="card-header text-center">
         <h5 class="card-title">Formulario de registro</h5>
@@ -21,7 +30,8 @@
         </div>
         <div class="card-footer text-muted">
             <a class="btn btn-info mr-1" href="?controller=alumnos&action=index" role="button">Cancelar</a>
-            <button type="submit" class="btn btn-success">Guardar Alumno</button>
+            <button type="submit" class="btn btn-success" name="submit">Guardar Alumno</button>
+            <input type="hidden" name="CSRFToken" value="<?php echo $_SESSION['AntiCSRF'];?>">
         </div>
     </form>
 </div>

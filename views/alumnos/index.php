@@ -14,6 +14,7 @@
             <th>Nombre</th>
             <th>Apellidos</th>
             <th>Acciones</th>
+            <th>Cursos</th>
         </tr>
         </thead>
         <tbody>
@@ -27,6 +28,12 @@
                            <a class="btn btn-info mr-1" href="?controller=alumnos&action=update&id=<?php echo $alumno->id; ?>" role="button">Edit</a>
                            <a class="btn btn-danger" href="?controller=alumnos&action=delete&id=<?php echo $alumno->id; ?>" role="button">Delete</a>
                        </div> 
+                    </td>
+                    <td>
+                       <div class="btn-group" role="group" aria-label="">
+                           <a class="btn btn-success mr-1" href="?controller=alumnos&action=asignar&id=<?php echo $alumno->id; ?>" role="button">Asignar</a>
+                           <a class="btn btn-info" href="?controller=alumnos&action=ver&id=<?php echo $alumno->id; ?>" role="button">Ver</a>
+                        </div> 
                     </td>
                 </tr>
             <?php } ?>

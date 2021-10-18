@@ -1,4 +1,7 @@
 <?php
+
+    require_once('models/curso.php');
+
     class Alumno {
 
         public $id;
@@ -40,7 +43,12 @@
             $conexionBD = BD::createInstance();
 
             $sql = $conexionBD->prepare("INSERT INTO alumnos(nombre, nif, apellidos) VALUES(?,?,?)");
-            $sql->execute(array($nombre,$nif,$apellidos));
+            if($sql->execute(array($nombre,$nif,$apellidos))){
+                return "Se ha almacenado correctamente";
+            }
+            else{
+                return "Ha ocurrido un error";
+            }
         }
 
         public static function delete($id)
@@ -48,14 +56,45 @@
             $conexionBD = BD::createInstance();
 
             $sql = $conexionBD->prepare("DELETE FROM alumnos WHERE id=?");
-            $sql->execute(array($id));
+            if($sql->execute(array($id))){
+                return "Se ha eliminado correctamente";
+            }
+            else{
+                return "Ha ocurrido un error";
+            }
         }
 
         public static function update($id, $nombre, $apellidos, $nif)
         {
             $conexionBD = BD::createInstance();
             $sql = $conexionBD->prepare("UPDATE alumnos SET nombre=?, apellidos=?, nif=? WHERE id=?");
-            $sql->execute(array($nombre,$apellidos,$nif, $id));
+            if($sql->execute(array($nombre,$apellidos,$nif, $id))){
+                return "Se ha actualizado correctamente";
+            }
+            else{
+                return "Ha ocurrido un error";
+            }
+        }
+        
+        public static function getAllCursos($id)
+        {
+            $conexionBD = BD::createInstance();
+            $sql = $conexionBD->prepare(
+                "SELECT c.*
+                FROM alumnos_cursos ac
+                JOIN cursos c ON c.id = ac.id_curso
+                WHERE ac.id_alumno = ?"
+            );
+            $sql->execute(array($id));
+
+            $lista = [];
+
+            foreach ($sql->fetchAll() as $fila)
+            {
+                $lista[] = new Curso($fila['id'], $fila['nombre'], $fila['creditos'], $fila['codigo']);
+            }
+
+            return $lista;
         }
     }
 ?>
